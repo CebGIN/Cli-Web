@@ -3,10 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Game</title>
 </head>
 <body>
-    
+
+    <header>
+        <h1>Memory Match: Edition</h1>
+    </header>
+
+    <main id="app-container">
+        
+        <section id="setup-menu" class="menu-screen">
+            <h2>Configuración de Partida</h2>
+            
+            <div class="input-group">
+                <label for="player-name">Nombre del Jugador:</label>
+                <input type="text" id="player-name" placeholder="Ej. Xx_GokuPro777_xX" required>
+            </div>
+
+            <div class="input-group">
+                <label for="difficulty">Selecciona Dificultad:</label>
+                <select id="difficulty">
+                    <option value="16">Fácil (4x4)</option>
+                    <option value="36">Intermedio (6x6)</option>
+                    <option value="64">Difícil (8x8)</option>
+                </select>
+            </div>
+
+            <button id="btn-start">Iniciar Juego</button>
+        </section>
+
+        <section id="game-screen" class="hidden">
+            <div id="hud">
+                <div class="stat">Jugador: <span id="display-name">-</span></div>
+                <div class="stat">Movimientos: <span id="move-count">0</span></div>
+                <button id="btn-restart">Reiniciar</button>
+            </div>
+
+            <div id="game-board"></div>
+        </section>
+
+        <div id="victory-modal" class="modal hidden">
+            <div class="modal-content">
+                <h2>¡Felicidades!</h2>
+                <p id="victory-message"></p>
+                <button>Jugar de nuevo</button>
+            </div>
+        </div>
+
+    </main>
+
     <script src="script.js"></script>
 </body>
 </html>
