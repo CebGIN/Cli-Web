@@ -1,15 +1,34 @@
 body {
     margin: 0;
     display: flex;
-    flex-direction: column; /* Apila contenedor y footer verticalmente */
-    min-height: 100vh;      /* Obliga al body a medir toda la pantalla */
+    flex-direction: column;
+    min-height: 100vh;
     font-family: sans-serif;
     background-color: #8c8c9a;
+}
+.Add {
+    background: green;
+    border-radius: 6px;
+    padding: 10px;
+    font-weight: bold;
+    border-width: 0px;
+    color:white
+}
+
+.removeButton {
+    background: red;
+    border-radius: 8px;
+    border-width: 0px;
+    padding: 6px;
+    padding-left: 7px;
+    margin-left: 10px;
+    font-weight: bold;
+    color:black;   
 }
 
 .contenedor {
     background: white;
-    margin: 20px auto;      /* Lo centra a él mismo en la pantalla */
+    margin: 20px auto;
     padding: 30px;
     border-radius: 12px;
     width: 90%;
@@ -17,11 +36,10 @@ body {
     box-shadow: 0 4px 15px rgba(0,0,0,0.2);
     flex: 1;
 
-    /* --- ESTO ES LO NUEVO --- */
     display: flex;
-    flex-direction: column; /* Apila título, input y lista */
-    align-items: center;    /* Centra todo horizontalmente */
-    text-align: center;     /* Asegura que el texto también se centre */
+    flex-direction: column;
+    align-items: center;
+    text-align: center; 
 }
 
 /* Para que el input y el botón no se vean pegados */
@@ -32,6 +50,7 @@ body {
     border: 1px solid #ccc;
     border-radius: 5px;
 }
+
 
 footer {
     background-color: #63636b; /* Un tono más oscuro para que contraste */
