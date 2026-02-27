@@ -40,15 +40,19 @@
                 <div class="stat">Movimientos: <span id="move-count">0</span></div>
                 <button id="btn-restart">Reiniciar</button>
             </div>
-
+            <div id="game-message" class="message-box hidden">
+                ¡Jugada errónea!
+            </div>
             <div id="game-board"></div>
         </section>
 
-        <div id="victory-modal" class="modal hidden">
+        <div id="victory-modal" class="modal-overlay hidden">
             <div class="modal-content">
                 <h2>¡Felicidades!</h2>
                 <p id="victory-message"></p>
-                <button>Jugar de nuevo</button>
+                <div class="modal-buttons">
+                    <button id="btn-play-again">Jugar de Nuevo</button>
+                </div>
             </div>
         </div>
 
