@@ -39,3 +39,43 @@ btnStart.addEventListener('click', () => {
 
     startGame(difficulty);
 });
+
+function startGame(totalCards) {
+    totalPairs = totalCards / 2;
+    matchedPairs = 0;
+    gameBoard.innerHTML = ''; // Limpiar tablero previo
+
+    // 1. Ajustar el Grid de CSS dinámicamente
+    const columns = Math.sqrt(totalCards);
+    gameBoard.style.gridTemplateColumns = `repeat(${columns}, 1fr)`;
+
+    // 2. Preparar los pares y mezclarlos (Fisher-Yates)
+    let gameIcons = icons.slice(0, totalPairs);
+    let cardSet = [...gameIcons, ...gameIcons]; // Duplicamos para crear pares
+    cardSet.sort(() => Math.random() - 0.5); // Mezcla rápida
+
+    // 3. Crear las cartas en el DOM
+    cardSet.forEach(icon => {
+        const card = document.createElement('div');
+        card.classList.add('card');
+        card.dataset.icon = icon; // Guardamos el valor en un atributo de datos
+        
+        // Estructura interna para el efecto flip (opcional luego)
+        card.innerHTML = `<div class="card-content">${icon}</div>`;
+        
+        card.addEventListener('click', flipCard);
+        gameBoard.appendChild(card);
+    });
+}
+
+function flipCard() {
+    if (lockBoard) return; // Bloqueo si hay una animación en curso
+    if (this === flippedCards[0]) return; // Evitar doble click en la misma carta
+
+    this.classList.add('flipped');
+    flippedCards.push(this);
+
+    if (flippedCards.length === 2) {
+        checkMatch();
+    }
+}
