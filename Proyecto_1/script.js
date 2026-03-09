@@ -17,6 +17,11 @@ let lockBoard = false;
 let matchedPairs = 0;
 let totalPairs = 0;
 
+// Timer
+let timerInterval;
+let seconds = 0;
+const timerDisplay = document.getElementById('timer');
+
 // Emojis para las cartas
 const icons = ['🔥', '⭐', '🍀', '💎', '🍎', '🚀', '👻', '🌈', 
                '⚽', '🎸', '🍦', '👾', '🐱', '🍕', '🔔', '🎁',
@@ -61,10 +66,10 @@ function startGame(totalCards) {
     const columns = Math.sqrt(totalCards);
     gameBoard.style.gridTemplateColumns = `repeat(${columns}, 1fr)`;
 
-    // 2. Preparar los pares y mezclarlos (Fisher-Yates)
+    // 2. Preparar los pares y mezclarlos
     let gameIcons = icons.slice(0, totalPairs);
-    let cardSet = [...gameIcons, ...gameIcons]; // Duplicamos para crear pares
-    cardSet.sort(() => Math.random() - 0.5); // Mezcla rápida
+    let cardSet = [...gameIcons, ...gameIcons];
+    cardSet.sort(() => Math.random() - 0.5);
 
     // 3. Crear las cartas en el DOM
     cardSet.forEach(icon => {
@@ -78,9 +83,12 @@ function startGame(totalCards) {
         card.addEventListener('click', flipCard);
         gameBoard.appendChild(card);
     });
+    startTimer()
 }
 
 function ReStart() {
+    stopTimer();
+    timerDisplay.textContent = "00:00";
     // 1. Manejo de visibilidad (Asegúrate de que victoryModal esté definido arriba)
     victoryModal.classList.add('hidden');
     gameScreen.classList.add('hidden');
@@ -165,8 +173,27 @@ function showErrorMessage() {
 }
 
 function showVictory() {
+    stopTimer(); // Detener al ganar
     const msg = document.getElementById('victory-message');
-    
+    msg.textContent = `¡Lo lograste en ${moves} movimientos y ${timerDisplay.textContent}!`;
     victoryModal.classList.remove('hidden');
-    msg.textContent = `¡Lo lograste en ${moves} movimientos!`;
+}
+
+
+
+function startTimer() {
+    stopTimer(); // Limpiar cualquier conteo previo
+    seconds = 0;
+    timerInterval = setInterval(() => {
+        seconds++;
+        const mins = Math.floor(seconds / 60);
+        const secs = seconds % 60;
+        // Formato MM:SS
+        timerDisplay.textContent = 
+            `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+    }, 1000);
+}
+
+function stopTimer() {
+    clearInterval(timerInterval);
 }

@@ -3,61 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Game</title>
+    <title>Idio</title>
     <link rel="stylesheet" href="style.css">
+
 </head>
+
 <body>
-
-    <header>
-        <h1>Game</h1>
-    </header>
-
-    <main id="app-container">
+    <section id="setup-menu" class="menu-screen">
+        <header class="game-header">
+            <h1>Idio</h1> </header>
         
-        <section id="setup-menu" class="menu-screen">
-            <h2>Configuración de Partida</h2>
-            
-            <div class="input-group">
-                <label for="player-name">Nombre del Jugador:</label>
-                <input type="text" id="player-name" placeholder="Ej. Xx_GokuPro777_xX" required>
+        <div class="menu-columns">
+            <div class="menu-column-left card-panel">
+                <h2>Configuración</h2>
+                <div class="input-group">
+                    <label for="player-name">Nombre del Jugador:</label>
+                    <input type="text" id="player-name" placeholder="Ej. Xx_GokuPro_xX" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="difficulty">Dificultad:</label>
+                    <select id="difficulty">
+                        <option value="16">Fácil (4x4)</option>
+                        <option value="36">Intermedio (6x6)</option>
+                        <option value="64">Difícil (8x8)</option>
+                    </select>
+                </div>
+                <button id="btn-start">Iniciar Juego</button>
             </div>
 
-            <div class="input-group">
-                <label for="difficulty">Selecciona Dificultad:</label>
-                <select id="difficulty">
-                    <option value="16">Fácil (4x4)</option>
-                    <option value="36">Intermedio (6x6)</option>
-                    <option value="64">Difícil (8x8)</option>
-                </select>
-            </div>
-
-            <button id="btn-start">Iniciar Juego</button>
-        </section>
-
-        <section id="game-screen" class="hidden">
-            <div id="hud">
-                <div class="stat">Jugador: <span id="display-name">-</span></div>
-                <div class="stat">Movimientos: <span id="move-count">0</span></div>
-                <button id="btn-restart">Reiniciar</button>
-            </div>
-            <div id="game-message" class="message-box hidden">
-                ¡Jugada errónea!
-            </div>
-            <div id="game-board"></div>
-        </section>
-
-        <div id="victory-modal" class="modal-overlay hidden">
-            <div class="modal-content">
-                <h2>¡Felicidades!</h2>
-                <p id="victory-message"></p>
-                <div class="modal-buttons">
-                    <button id="btn-play-again">Jugar de Nuevo</button>
+            <div class="menu-column-right">
+                <div class="info-box card-panel">
+                    <h3>Sobre el Juego</h3>
+                    <p>Encuentra todos los pares de emojis. Los errores bloquearán el tablero temporalmente.</p>
+                </div>
+                <div class="info-box card-panel">
+                    <h3>Leaderboard</h3>
+                    <ul id="high-scores">
+                        <li>Cebrián - 12 movs</li>
+                        <li>Player1 - 18 movs</li>
+                    </ul>
                 </div>
             </div>
         </div>
+    </section>
 
-    </main>
+    <section id="game-screen" class="hidden">
+        <header class="game-header">
+            <h2>Partida en Curso</h2>
+        </header>
+
+        <div class="game-main-layout">
+            <div id="game-board-container">
+                <div id="game-board"></div>
+            </div>
+
+            <aside id="hud-panel" class="card-panel">
+                <div class="stat-item">
+                    <span class="label">Jugador</span>
+                    <span id="display-name" class="value">-</span>
+                </div>
+                <div class="stat-item">
+                    <span class="label">Movimientos</span>
+                    <span id="move-count" class="value">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="label">Tiempo</span>
+                    <span id="timer" class="value">00:00</span>
+                </div>
+                <hr>
+                <button id="btn-restart" class="btn-secondary">Reiniciar</button>
+            </aside>
+        </div>
+    </section>
+
+    <div id="game-message" class="message-box hidden">
+        ¡Jugada errónea! ❌
+    </div>
+
+    <div id="victory-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <div class="trophy">🏆</div>
+            <h2>¡Felicidades!</h2>
+            <p id="victory-message"></p>
+            <button id="btn-play-again">Jugar de Nuevo</button>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
+
 </html>
