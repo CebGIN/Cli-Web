@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Boni</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <section id="setup-menu" class="menu-screen">
+        <div class="menu-panel card-panel">
+            <h1>QUEUE SORT</h1>
+            <p class="subtitle">Ordena la estructura de datos usando memoria limitada</p>
+            
+            <div class="input-group">
+                <label for="card-count">Cantidad de Nodos (Dificultad):</label>
+                <select id="card-count">
+                    <option value="5">Fácil (5 Nodos)</option>
+                    <option value="8">Intermedio (8 Nodos)</option>
+                    <option value="12">Difícil (12 Nodos)</option>
+                </select>
+            </div>
+            
+            <button id="btn-start" onclick="startGameFromMenu()">INICIAR SISTEMA</button>
+        </div>
+    </section>
+
+    <section id="game-screen" class="hidden">
+        <header class="hud-stats">
+            <div class="stat-box">MOVIMIENTOS: <span id="moves">0</span></div>
+            <div class="stat-box">TIEMPO: <span id="timer">00:00</span></div>
+            <button onclick="ReStart()" class="btn-secondary">ABORTAR</button>
+        </header>
+
+        <main class="interaction-area">
+            <div class="drop-zone" id="queue-end">
+                <p class="zone-label">← INSERTAR</p>
+                <div id="hidden-stack" class="stack-visual"></div>
+            </div>
+
+            <div class="drop-zone" id="queue-front">
+                <p class="zone-label">FRENTE</p>
+            </div>
+
+            <div class="drop-zone" id="buffer">
+                <p class="zone-label">BUFFER</p>
+            </div>
+        </main>
+
+        <aside class="history-panel">
+            <h3>LOG DE OPERACIONES</h3>
+            <div id="history-log" class="history-content"></div>
+        </aside>
+    </section>
+
+    <div id="victory-modal" class="modal-overlay hidden">
+        <div class="modal-content card-panel">
+            <div class="trophy">🏆</div>
+            <h2>¡EJECUCIÓN EXITOSA!</h2>
+            <p id="victory-message"></p>
+            <button onclick="ReStart()">VOLVER AL INICIO</button>
+        </div>
+    </div>
+
+    <div id="game-message" class="message-box hidden">
+        Operación Inválida
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
