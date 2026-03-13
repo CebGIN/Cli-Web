@@ -78,15 +78,79 @@
         <div class="event-log" id="log-error">Logs de eventos: Esperando click en reintentar...</div>
     </section>
 
+    <section class="test-section">
+        <h2>3. Anime Card (Single)</h2>
+        <div style="width: 220px;">
+            <anime-card id="card-test"></anime-card>
+        </div>
+        <div class="event-log" id="log-card">Logs de eventos: Esperando click en tarjeta...</div>
+    </section>
+
+    <section class="test-section">
+        <h2>Pruebas de componentes personalizados</h2>
+
+        <div style="display: flex; gap: 50px; flex-wrap: wrap;">
+
+            <div style="border: 1px solid #444; padding: 10px;">
+                <p class="demo-label">Loading Estándar</p>
+                <loading-state></loading-state>
+            </div>
+
+            <div
+                style="border: 1px solid #444; padding: 10px; --spinner-color: #00b894; --loading-text-color: #00b894;">
+                <p class="demo-label">Loading "Success" (Verde)</p>
+                <loading-state></loading-state>
+            </div>
+
+            <div style="border: 1px solid #444; padding: 10px; --spinner-size: 20px; --loading-padding: 10px;">
+                <p class="demo-label">Loading Mini</p>
+                <loading-state></loading-state>
+            </div>
+
+            <div style="border: 1px solid #444; padding: 10px;">
+                <p class="demo-label">Error Estándar</p>
+                <error-state></error-state>
+            </div>
+
+            <div style="border: 1px solid #444; padding: 10px; --error-btn-bg: #e67e22; --error-text-color: #e67e22;">
+                <p class="demo-label">Error "Warning" (Naranja)</p>
+                <error-state message="La conexión es lenta..."></error-state>
+            </div>
+
+        </div>
+    </section>
+
     <script src="LoadingState.js"></script>
     <script src="ErrorState.js"></script>
+    <script src="AnimeCard.js"></script>
 
     <script>
-        // Configurar Error State
+        // 1. Configurar Error State
         const errorComp = document.getElementById('error-test');
         errorComp.addEventListener('retry', () => {
             const log = document.getElementById('log-error');
             log.innerHTML += `<br>> Evento 'retry' capturado a las ${new Date().toLocaleTimeString()}`;
+            log.scrollTop = log.scrollHeight;
+        });
+
+        // 2. Configurar Anime Card con datos de la API (Simulados)
+        const cardComp = document.getElementById('card-test');
+
+        // Datos siguiendo la estructura real de Jikan API
+        cardComp.data = {
+            mal_id: 5114,
+            title: "Fullmetal Alchemist: Brotherhood",
+            title_english: "Fullmetal Alchemist: Brotherhood",
+            images: { jpg: { image_url: "https://cdn.myanimelist.net/images/anime/1208/94745.jpg" } },
+            score: 9.10,
+            episodes: 64,
+            status: "Finished Airing",
+            sypnosis: "Nose"
+        };
+
+        cardComp.addEventListener('card-click', (e) => {
+            const log = document.getElementById('log-card');
+            log.innerHTML += `<br>> Evento 'card-click' capturado! ID: ${e.detail}`;
             log.scrollTop = log.scrollHeight;
         });
     </script>
