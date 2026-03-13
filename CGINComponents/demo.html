@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AnimeHub - Banco de Pruebas</title>
+    <style>
+        body {
+            background-color: #121212;
+            color: #e0e0e0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        header {
+            border-bottom: 2px solid #6c5ce7;
+            margin-bottom: 30px;
+            padding-bottom: 10px;
+        }
+
+        .test-section {
+            background: #1e1e1e;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 40px;
+            border: 1px solid #333;
+        }
+
+        .test-section h2 {
+            margin-top: 0;
+            color: #6c5ce7;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+        }
+
+        /* Contenedor para probar la grilla */
+        .grid-preview {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .event-log {
+            background: #000;
+            color: #00ff00;
+            padding: 10px;
+            font-family: monospace;
+            font-size: 0.8rem;
+            height: 100px;
+            overflow-y: auto;
+            margin-top: 10px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>AnimeHub Component Workshop</h1>
+        <p>Prueba de átomos y moléculas antes del ensamblaje final.</p>
+    </header>
+
+    <section class="test-section">
+        <h2>1. Loading State</h2>
+        <loading-state id="loader-test"></loading-state>
+        <button onclick="document.getElementById('loader-test').message = 'Buscando en la base de datos...'">Cambiar
+            Mensaje</button>
+    </section>
+
+    <script src="LoadingState.js"></script>
+</body>
+
+</html>
