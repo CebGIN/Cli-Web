@@ -60,7 +60,7 @@
 
     <header>
         <h1>AnimeHub Component Workshop</h1>
-        <p>Prueba de átomos y moléculas antes del ensamblaje final.</p>
+        <p>Prueba de componentes antes del ensamblaje final.</p>
     </header>
 
     <section class="test-section">
@@ -70,7 +70,26 @@
             Mensaje</button>
     </section>
 
+    <section class="test-section">
+        <h2>2. Error State</h2>
+        <div id="error-container">
+            <error-state id="error-test"></error-state>
+        </div>
+        <div class="event-log" id="log-error">Logs de eventos: Esperando click en reintentar...</div>
+    </section>
+
     <script src="LoadingState.js"></script>
+    <script src="ErrorState.js"></script>
+
+    <script>
+        // Configurar Error State
+        const errorComp = document.getElementById('error-test');
+        errorComp.addEventListener('retry', () => {
+            const log = document.getElementById('log-error');
+            log.innerHTML += `<br>> Evento 'retry' capturado a las ${new Date().toLocaleTimeString()}`;
+            log.scrollTop = log.scrollHeight;
+        });
+    </script>
 </body>
 
 </html>
