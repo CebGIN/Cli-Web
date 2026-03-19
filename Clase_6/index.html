@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokémon Guessing Game</title>
+
+    <!-- Cargamos los componentes primero con defer para asegurar el orden -->
+    <script src="SearchBar.js" defer></script>
+    <script src="PokeCard.js" defer></script>
+    <script src="PokedexModal.js" defer></script>
+    <!-- El script principal que coordina todo -->
+    <script src="App.js" defer></script>
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <div class="pokeball-background">
+        <div class="pokeball">
+            <div class="pokeball-band"></div>
+            <div class="pokeball-button"></div>
+        </div>
+    </div>
+
+    <main class="game-layout">
+        <h2 id="feedback-message">Cargando Pokémon...</h2>
+
+        <div class="central-container">
+            <poke-card id="pokemon-display"></poke-card>
+        </div>
+
+        <search-bar id="guess-input"></search-bar>
+    </main>
+
+    <pokedex-modal id="game-modal"></pokedex-modal>
+
+    <footer class="game-footer">
+        Powered by <a href="https://pokeapi.co/" target="_blank" rel="noopener">PokeAPI</a>
+    </footer>
+
+</body>
+
+</html>
