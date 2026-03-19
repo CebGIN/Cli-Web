@@ -4,155 +4,209 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AnimeHub - Banco de Pruebas</title>
+    <title>AnimeHub - Taller de Componentes</title>
     <style>
+        :root {
+            --primary: #6c5ce7;
+            --bg-dark: #121212;
+            --bg-panel: #1e1e1e;
+        }
+
         body {
-            background-color: #121212;
-            color: #e0e0e0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg-dark);
+            color: white;
+            font-family: 'Segoe UI', sans-serif;
             margin: 0;
-            padding: 20px;
         }
 
-        header {
-            border-bottom: 2px solid #6c5ce7;
+        /* Layout del Banco de Pruebas */
+        .workshop-header {
+            background: var(--primary);
+            padding: 20px;
+            text-align: center;
+        }
+
+        .section {
+            padding: 40px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            border-bottom: 1px solid #333;
+        }
+
+        .section h2 {
+            color: var(--primary);
+            border-left: 5px solid var(--primary);
+            padding-left: 15px;
             margin-bottom: 30px;
-            padding-bottom: 10px;
         }
 
-        .test-section {
-            background: #1e1e1e;
+        /* Contenedores de prueba */
+        .demo-box {
+            background: var(--bg-panel);
             border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 40px;
+            padding: 25px;
+            margin-bottom: 20px;
             border: 1px solid #333;
         }
 
-        .test-section h2 {
-            margin-top: 0;
-            color: #6c5ce7;
-            font-size: 1.2rem;
-            text-transform: uppercase;
-        }
-
-        /* Contenedor para probar la grilla */
-        .grid-preview {
+        .grid-3 {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 20px;
         }
 
-        .event-log {
-            background: #000;
-            color: #00ff00;
-            padding: 10px;
+        /* Monitor de Eventos */
+        .event-monitor {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 350px;
+            height: 250px;
+            background: rgba(0, 0, 0, 0.9);
+            border: 1px solid var(--primary);
+            border-radius: 8px;
             font-family: monospace;
-            font-size: 0.8rem;
-            height: 100px;
+            font-size: 12px;
+            display: flex;
+            flex-direction: column;
+            z-index: 2000;
+        }
+
+        .monitor-header {
+            background: var(--primary);
+            padding: 8px;
+            font-weight: bold;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .monitor-body {
+            padding: 10px;
             overflow-y: auto;
-            margin-top: 10px;
-            border-radius: 4px;
+            flex-grow: 1;
+            color: #0f0;
         }
     </style>
 </head>
 
 <body>
 
-    <header>
+    <header class="workshop-header">
         <h1>AnimeHub Component Workshop</h1>
-        <p>Prueba de componentes antes del ensamblaje final.</p>
+        <p>Entorno de pruebas para Átomos y Moléculas</p>
     </header>
 
-    <section class="test-section">
-        <h2>1. Loading State</h2>
-        <loading-state id="loader-test"></loading-state>
-        <button onclick="document.getElementById('loader-test').message = 'Buscando en la base de datos...'">Cambiar
-            Mensaje</button>
-    </section>
+    <nav-bar id="navbar-test"></nav-bar>
 
-    <section class="test-section">
-        <h2>2. Error State</h2>
-        <div id="error-container">
-            <error-state id="error-test"></error-state>
-        </div>
-        <div class="event-log" id="log-error">Logs de eventos: Esperando click en reintentar...</div>
-    </section>
+    <main>
+        <section class="section">
+            <h2>1. Átomos (Componentes Base)</h2>
+            <div class="grid-3">
+                <div class="demo-box">
+                    <h3>Loading States</h3>
+                    <loading-state></loading-state>
+                    <loading-state style="--spinner-color: #00b894;" message="Verde personalizado..."></loading-state>
+                </div>
+                <div class="demo-box">
+                    <h3>Error States</h3>
+                    <error-state id="error-demo"></error-state>
+                </div>
+                <div class="demo-box">
+                    <h3>Anime Card</h3>
+                    <div style="width: 200px; margin: 0 auto;">
+                        <anime-card id="single-card-test"></anime-card>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    <section class="test-section">
-        <h2>3. Anime Card (Single)</h2>
-        <div style="width: 220px;">
-            <anime-card id="card-test"></anime-card>
-        </div>
-        <div class="event-log" id="log-card">Logs de eventos: Esperando click en tarjeta...</div>
-    </section>
+        <section class="section">
+            <h2>2. Moléculas (Interacción y Datos)</h2>
 
-    <section class="test-section">
-        <h2>Pruebas de componentes personalizados</h2>
-
-        <div style="display: flex; gap: 50px; flex-wrap: wrap;">
-
-            <div style="border: 1px solid #444; padding: 10px;">
-                <p class="demo-label">Loading Estándar</p>
-                <loading-state></loading-state>
+            <div class="demo-box">
+                <h3>Búsqueda y Filtros</h3>
+                <div style="display: flex; gap: 20px; align-items: flex-end;">
+                    <search-bar id="search-demo" style="flex-grow: 1;"></search-bar>
+                    <genre-filter id="filter-demo"></genre-filter>
+                </div>
+                <p style="font-size: 12px; color: #888; margin-top: 10px;">
+                    * Escribe rápido en el buscador para probar el <b>Debounce (500ms)</b> requerido.
+                </p>
             </div>
 
-            <div
-                style="border: 1px solid #444; padding: 10px; --spinner-color: #00b894; --loading-text-color: #00b894;">
-                <p class="demo-label">Loading "Success" (Verde)</p>
-                <loading-state></loading-state>
+            <div class="demo-box">
+                <h3>Anime Grid (Contenedor Dinámico)</h3>
+                <div style="margin-bottom: 20px;">
+                    <button onclick="fillGrid()">Cargar 8 tarjetas</button>
+                    <button onclick="emptyGrid()">Limpiar grilla</button>
+                </div>
+                <anime-grid id="grid-demo"></anime-grid>
             </div>
+        </section>
+    </main>
 
-            <div style="border: 1px solid #444; padding: 10px; --spinner-size: 20px; --loading-padding: 10px;">
-                <p class="demo-label">Loading Mini</p>
-                <loading-state></loading-state>
-            </div>
-
-            <div style="border: 1px solid #444; padding: 10px;">
-                <p class="demo-label">Error Estándar</p>
-                <error-state></error-state>
-            </div>
-
-            <div style="border: 1px solid #444; padding: 10px; --error-btn-bg: #e67e22; --error-text-color: #e67e22;">
-                <p class="demo-label">Error "Warning" (Naranja)</p>
-                <error-state message="La conexión es lenta..."></error-state>
-            </div>
-
-        </div>
-    </section>
+    <div class="event-monitor">
+        <div class="monitor-header"><span>Event Log</span> <button
+                onclick="document.querySelector('.monitor-body').innerHTML=''">Limpiar</button></div>
+        <div class="monitor-body" id="event-log"></div>
+    </div>
 
     <script src="LoadingState.js"></script>
     <script src="ErrorState.js"></script>
     <script src="AnimeCard.js"></script>
+    <script src="NavBar.js"></script>
+    <script src="SearchBar.js"></script>
+    <script src="GenreFilter.js"></script>
+    <script src="AnimeGrid.js"></script>
 
     <script>
-        // 1. Configurar Error State
-        const errorComp = document.getElementById('error-test');
-        errorComp.addEventListener('retry', () => {
-            const log = document.getElementById('log-error');
-            log.innerHTML += `<br>> Evento 'retry' capturado a las ${new Date().toLocaleTimeString()}`;
-            log.scrollTop = log.scrollHeight;
-        });
-
-        // 2. Configurar Anime Card con datos de la API (Simulados)
-        const cardComp = document.getElementById('card-test');
-
-        // Datos siguiendo la estructura real de Jikan API
-        cardComp.data = {
-            mal_id: 5114,
-            title: "Fullmetal Alchemist: Brotherhood",
-            title_english: "Fullmetal Alchemist: Brotherhood",
-            images: { jpg: { image_url: "https://cdn.myanimelist.net/images/anime/1208/94745.jpg" } },
-            score: 9.10,
-            episodes: 64,
-            status: "Finished Airing",
-            sypnosis: "Nose"
+        const logger = document.getElementById('event-log');
+        const log = (source, msg) => {
+            const time = new Date().toLocaleTimeString();
+            logger.innerHTML = `<div>[${time}] <b>${source}</b>: ${msg}</div>` + logger.innerHTML;
         };
 
-        cardComp.addEventListener('card-click', (e) => {
-            const log = document.getElementById('log-card');
-            log.innerHTML += `<br>> Evento 'card-click' capturado! ID: ${e.detail}`;
-            log.scrollTop = log.scrollHeight;
-        });
+        // --- Configuración de Eventos ---
+
+        // Navbar
+        document.getElementById('navbar-test').addEventListener('navigate', (e) => log('NAVBAR', `Ruta: ${e.detail}`));
+
+        // Error Retry
+        document.getElementById('error-demo').addEventListener('retry', () => log('ERROR', 'Botón reintentar presionado'));
+
+        // Search Debounce
+        document.getElementById('search-demo').addEventListener('search', (e) => log('SEARCH', `Query: "${e.detail}"`));
+
+        // Genre Filter
+        document.getElementById('filter-demo').addEventListener('filter-change', (e) => log('FILTER', `ID Género: ${e.detail}`));
+
+        // Grid e interacción de burbujeo
+        document.getElementById('grid-demo').addEventListener('card-click', (e) => log('GRID > CARD', `ID Anime: ${e.detail}`));
+
+        // --- Simulación de Datos ---
+        const fakeData = {
+            mal_id: 1,
+            title: "Bebop de Cowboy",
+            images: { jpg: { large_image_url: "https://cdn.myanimelist.net/images/anime/4/19644.jpg" } },
+            score: 8.75,
+            synopsis: "Un grupo de cazarrecompensas viaja por el espacio..."
+        };
+
+        // Poblar card individual
+        document.getElementById('single-card-test').data = fakeData;
+
+        // Funciones de Grilla
+        function fillGrid() {
+            const list = Array(8).fill(fakeData).map((d, i) => ({ ...d, mal_id: i, title: `${d.title} #${i + 1}` }));
+            document.getElementById('grid-demo').animes = list;
+            log('GRID', 'Poblada con 8 elementos');
+        }
+
+        function emptyGrid() {
+            document.getElementById('grid-demo').animes = [];
+            log('GRID', 'Vaciada (Estado vacío)');
+        }
     </script>
 </body>
 

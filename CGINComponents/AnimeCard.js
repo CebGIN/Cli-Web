@@ -83,16 +83,23 @@ class AnimeCard extends HTMLElement {
             }
         });
 
-        // Ensamblaje
-        this.appendChild(this.$img);
+        // Ensamblaje interno (sin añadir elementos a 'this' en el constructor)
         this.$titleOverlay.appendChild(this.$title);
         this.$titleOverlay.appendChild(this.$mainScore);
-        this.appendChild(this.$titleOverlay);
+        
         this.$infoTop.appendChild(this.$date);
         this.$infoTop.appendChild(this.$episodes);
+        
         this.$hoverInfo.appendChild(this.$infoTop);
         this.$hoverInfo.appendChild(this.$description);
-        this.appendChild(this.$hoverInfo);
+    }
+
+    connectedCallback() {
+        if (!this.contains(this.$img)) {
+            this.appendChild(this.$img);
+            this.appendChild(this.$titleOverlay);
+            this.appendChild(this.$hoverInfo);
+        }
     }
 
     set data(anime) {
