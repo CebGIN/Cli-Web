@@ -144,6 +144,14 @@
                 <anime-grid id="grid-demo"></anime-grid>
             </div>
         </section>
+
+        <section class="section">
+            <h2>3. Organismos (Vistas y Layouts)</h2>
+            <div class="demo-box">
+                <h3>Anime Detail (Vista Completa)</h3>
+                <anime-detail id="detail-demo"></anime-detail>
+            </div>
+        </section>
     </main>
 
     <div class="event-monitor">
@@ -159,6 +167,7 @@
     <script src="SearchBar.js"></script>
     <script src="GenreFilter.js"></script>
     <script src="AnimeGrid.js"></script>
+    <script src="AnimeDetail.js"></script>
 
     <script>
         const logger = document.getElementById('event-log');
@@ -184,6 +193,9 @@
         // Grid e interacción de burbujeo
         document.getElementById('grid-demo').addEventListener('card-click', (e) => log('GRID > CARD', `ID Anime: ${e.detail}`));
 
+        // Anime Detail - Botón Volver
+        document.getElementById('detail-demo').addEventListener('back-click', () => log('DETAIL', 'Botón volver presionado'));
+
         // --- Simulación de Datos ---
         const fakeData = {
             mal_id: 1,
@@ -207,6 +219,19 @@
             document.getElementById('grid-demo').animes = [];
             log('GRID', 'Vaciada (Estado vacío)');
         }
+
+        // Poblar Detalle (Vista de prueba)
+        const detailData = {
+            ...fakeData,
+            title_english: "Cowboy Bebop (Full Edition)",
+            status: "Finished Airing",
+            genres: [
+                { name: "Action" },
+                { name: "Sci-Fi" },
+                { name: "Space" }
+            ]
+        };
+        document.getElementById('detail-demo').data = detailData;
     </script>
 </body>
 
