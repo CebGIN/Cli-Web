@@ -38,9 +38,13 @@ class LoadingState extends HTMLElement {
 
         this.$spinner.className = 'spinner';
         this.$text.textContent = 'Cargando...';
+    }
 
-        this.appendChild(this.$spinner);
-        this.appendChild(this.$text);
+    connectedCallback() {
+        if (!this.contains(this.$spinner)) {
+            this.appendChild(this.$spinner);
+            this.appendChild(this.$text);
+        }
     }
 
     set message(text) {

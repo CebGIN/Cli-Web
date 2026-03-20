@@ -9,7 +9,13 @@ class Cover extends HTMLElement {
         this.releaseDate = this.getAttribute("date") || "N/A";
         this.imageSrc = this.getAttribute("src") || "https://via.placeholder.com/200x300";
 
-        this.render();
+        // this.render(); // NO llamar aquí para evitar errores del DOM
+    }
+
+    connectedCallback() {
+        if (!this.contains(this.$cover)) {
+            this.render();
+        }
     }
 
     render() {

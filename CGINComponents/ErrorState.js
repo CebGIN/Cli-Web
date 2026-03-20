@@ -52,10 +52,14 @@ class ErrorState extends HTMLElement {
         this.$retryBtn.addEventListener('click', () => {
             this.dispatchEvent(new CustomEvent('retry', { bubbles: true }));
         });
+    }
 
-        this.appendChild(this.$icon);
-        this.appendChild(this.$message);
-        this.appendChild(this.$retryBtn);
+    connectedCallback() {
+        if (!this.contains(this.$icon)) {
+            this.appendChild(this.$icon);
+            this.appendChild(this.$message);
+            this.appendChild(this.$retryBtn);
+        }
     }
 
     set message(text) {

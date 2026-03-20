@@ -31,8 +31,6 @@ class GenreFilter extends HTMLElement {
         defaultOption.textContent = "Todos los géneros";
         this.$select.appendChild(defaultOption);
 
-        this.appendChild(this.$select);
-
         // Emitir evento al cambiar
         this.$select.addEventListener('change', () => {
             this.dispatchEvent(new CustomEvent('filter-change', {
@@ -47,6 +45,12 @@ class GenreFilter extends HTMLElement {
             { mal_id: 4, name: "Comedy" },
             { mal_id: 8, name: "Drama" }
         ];
+    }
+
+    connectedCallback() {
+        if (!this.contains(this.$select)) {
+            this.appendChild(this.$select);
+        }
     }
 
     // Setter para cuando tengamos los datos reales de la API

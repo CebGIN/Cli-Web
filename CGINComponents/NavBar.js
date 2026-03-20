@@ -58,10 +58,10 @@ class NavBar extends HTMLElement {
 
         this.$logo = document.createElement('h1');
         this.$logo.className = 'nav-logo';
-        // Construimos el logo "AnimeHub" seguro sin innerHTML para datos, aunque aquí es estático
-        const logoText1 = document.createTextNode('Anime');
+        // Construimos el logo "Neo Alejandria"
+        const logoText1 = document.createTextNode(' Neo ');
         const logoSpan = document.createElement('span');
-        logoSpan.textContent = 'Hub';
+        logoSpan.textContent = 'Alejandría';
         this.$logo.appendChild(logoText1);
         this.$logo.appendChild(logoSpan);
 
@@ -85,8 +85,6 @@ class NavBar extends HTMLElement {
         this.$container.appendChild(this.$logo);
         this.$container.appendChild(this.$linksContainer);
 
-        this.appendChild(this.$container);
-
         // Interacción (Emitir eventos)
         const emitNav = (route) => {
             this.dispatchEvent(new CustomEvent('navigate', { detail: route, bubbles: true }));
@@ -96,6 +94,12 @@ class NavBar extends HTMLElement {
         this.$logo.addEventListener('click', () => emitNav('#home'));
         this.$homeLink.addEventListener('click', () => emitNav('#home'));
         this.$searchLink.addEventListener('click', () => emitNav('#search'));
+    }
+
+    connectedCallback() {
+        if (!this.contains(this.$container)) {
+            this.appendChild(this.$container);
+        }
     }
 
     // Método para actualizar visualmente el link activo desde fuera

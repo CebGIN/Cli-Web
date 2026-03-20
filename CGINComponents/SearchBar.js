@@ -57,7 +57,6 @@ class SearchBar extends HTMLElement {
 
         this.$container.appendChild(this.$input);
         this.$container.appendChild(this.$btn);
-        this.appendChild(this.$container);
 
         // Interacción: Emisión de evento con Debounce
         const emitSearch = () => {
@@ -83,6 +82,12 @@ class SearchBar extends HTMLElement {
                 emitSearch();
             }, 500); 
         });
+    }
+
+    connectedCallback() {
+        if (!this.contains(this.$container)) {
+            this.appendChild(this.$container);
+        }
     }
 
     // Permitir inyectar valor inicial (ej. al volver a la vista)
