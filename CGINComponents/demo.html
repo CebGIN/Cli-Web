@@ -196,6 +196,12 @@
         // Anime Detail - Botón Volver
         document.getElementById('detail-demo').addEventListener('back-click', () => log('DETAIL', 'Botón volver presionado'));
 
+        // Escuchar clics en géneros desde el detalle
+        document.querySelector('anime-detail').addEventListener('genre-click', (e) => {
+            const { id, name } = e.detail;
+            log('DETAIL > GENRE', `Filtrar por: ${name} (ID: ${id})`);
+        });
+
         // --- Simulación de Datos ---
         const fakeData = {
             mal_id: 1,
@@ -226,9 +232,9 @@
             title_english: "Cowboy Bebop (Full Edition)",
             status: "Finished Airing",
             genres: [
-                { name: "Action" },
-                { name: "Sci-Fi" },
-                { name: "Space" }
+                { mal_id: 1, name: "Action" },
+                { mal_id: 2, name: "Sci-Fi" },
+                { mal_id: 3, name: "Space" }
             ]
         };
         document.getElementById('detail-demo').data = detailData;

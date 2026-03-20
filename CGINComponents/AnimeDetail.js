@@ -31,6 +31,14 @@ class AnimeDetail extends HTMLElement {
                 
                 .genres-list { display: flex; gap: 10px; flex-wrap: wrap; margin: 15px 0; }
                 .genre-tag { background: #333; padding: 5px 15px; border-radius: 15px; font-size: 0.9rem; border: 1px solid var(--primary); }
+                .genre-tag.clickable {
+                    cursor: pointer;
+                    transition: transform 0.2s, background 0.2s;
+                }
+                .genre-tag.clickable:hover {
+                    background: var(--primary, #6c5ce7);
+                    transform: translateY(-2px);
+                }
                 
                 @media (max-width: 768px) {
                     .detail-content { grid-template-columns: 1fr; }
@@ -92,15 +100,35 @@ class AnimeDetail extends HTMLElement {
         const synopsisText = document.createElement('p');
         synopsisText.textContent = this.anime.synopsis || 'No hay sinopsis disponible.';
 
-        // Lista de Géneros
+        // 2.3 Lista de Géneros Interactiva
         const genresCont = document.createElement('div');
         genresCont.className = 'genres-list';
-        this.anime.genres?.forEach(g => {
-            const tag = document.createElement('span');
-            tag.className = 'genre-tag';
-            tag.textContent = g.name;
-            genresCont.appendChild(tag);
-        });
+
+        if (this.anime.genres && this.anime.genres.length > 0) {
+            this.anime.genres.forEach(genre => {
+                const tag = document.createElement('span');
+                tag.className = 'genre-tag clickable'; // Añadimos clase para estilo de cursor
+                tag.textContent = genre.name;
+                
+                // Señal: Emitir evento al hacer clic en el género
+                tag.addEventListener('click', () => {
+                    this.dispatchEvent(new CustomEvent('genre-click', {
+                        detail: { 
+                            id: genre.mal_id, 
+                            name: genre.name 
+                        },
+                        bubbles: true,
+                        composed: true
+                    }));
+                });
+                
+                genresCont.appendChild(tag);
+            });
+        } else {
+            const noGenres = document.createElement('span');
+            noGenres.textContent = 'Géneros no disponibles';
+            genresCont.appendChild(noGenres);
+        }
 
         info.appendChild(synopsisTitle);
         info.appendChild(synopsisText);
