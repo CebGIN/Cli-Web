@@ -1,0 +1,197 @@
+/* ==========================================================================
+   GymLog - Wii Fit Inspired Design System
+   ========================================================================== */
+
+:root {
+    /* Color Palette */
+    --wii-white: #FFFFFF;
+    --wii-bg: #F5F7FA;
+    --wii-teal: #4DB6AC; /* Main App Color */
+    --wii-teal-hover: #26A69A;
+    --wii-teal-light: #B2DFDB;
+    --wii-text-dark: #37474F;
+    --wii-text-muted: #78909C;
+    --wii-success: #81C784;
+    --wii-warning: #FFB74D;
+    --wii-danger: #E57373;
+    
+    /* Spacing & Sizing */
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+    --spacing-xl: 32px;
+    
+    /* Radii */
+    --radius-pill: 50px;
+    --radius-card: 20px;
+    --radius-sm: 8px;
+
+    /* Shadows */
+    --shadow-soft: 0 4px 12px rgba(0,0,0,0.05);
+    --shadow-hover: 0 8px 24px rgba(0,0,0,0.1);
+    
+    /* Typography */
+    --font-main: 'Nunito', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* ==========================================================================
+   Resets Globales
+   ========================================================================== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-main);
+    background-color: var(--wii-bg);
+    color: var(--wii-text-dark);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+}
+
+/* ==========================================================================
+   Layout Base
+   ========================================================================== */
+#app-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 0 var(--spacing-xl) 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+#app-content {
+    flex-grow: 1;
+    padding: var(--spacing-md);
+    animation: fadeIn 0.3s ease;
+}
+
+/* ==========================================================================
+   Navegación (Header)
+   ========================================================================== */
+#main-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-lg) var(--spacing-md);
+    background-color: var(--wii-bg);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.nav-brand {
+    font-size: 2rem;
+    font-weight: 800;
+    cursor: pointer;
+    user-select: none;
+    transition: transform 0.2s ease;
+}
+
+.nav-brand:active {
+    transform: scale(0.95);
+}
+
+.wiifit-text {
+    color: var(--wii-text-dark);
+}
+
+.wiifit-subtext {
+    color: var(--wii-teal);
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: var(--spacing-sm);
+    flex-wrap: wrap;
+}
+
+/* ==========================================================================
+   Botones Estilo Wii
+   ========================================================================== */
+.wii-btn {
+    background-color: var(--wii-white);
+    color: var(--wii-text-dark);
+    border: 2px solid transparent;
+    padding: 10px 20px;
+    border-radius: var(--radius-pill);
+    font-family: var(--font-main);
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    box-shadow: var(--shadow-soft);
+    transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.wii-btn:hover {
+    transform: scale(1.05);
+    box-shadow: var(--shadow-hover);
+    color: var(--wii-teal);
+}
+
+.wii-btn:active {
+    transform: scale(0.95);
+}
+
+.wii-btn.active {
+    background-color: var(--wii-teal);
+    color: var(--wii-white);
+}
+
+/* Utility classes */
+.wii-btn-primary { background-color: var(--wii-teal); color: var(--wii-white); }
+.wii-btn-primary:hover { background-color: var(--wii-teal-hover); color: var(--wii-white); }
+
+.wii-btn-danger { background-color: var(--wii-white); color: var(--wii-danger); border-color: var(--wii-danger); }
+.wii-btn-danger:hover { background-color: var(--wii-danger); color: var(--wii-white); }
+
+/* ==========================================================================
+   Animaciones & Estados
+   ========================================================================== */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.wii-loading-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 60vh;
+    gap: var(--spacing-md);
+    color: var(--wii-text-muted);
+}
+
+.wii-spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid var(--wii-teal-light);
+    border-top: 5px solid var(--wii-teal);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Common Card Base */
+.wii-card-base {
+    background: var(--wii-white);
+    border-radius: var(--radius-card);
+    padding: var(--spacing-lg);
+    box-shadow: var(--shadow-soft);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.wii-card-hoverable:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+}

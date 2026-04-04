@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebFit - Wii Style Gym</title>
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- Components -->
+    <script src="js/components/WiiCard.js" defer></script>
+    <script src="js/components/States.js" defer></script>
+    
+    <!-- Views / Debug -->
+    <script src="js/debug.js" defer></script>
+    
+    <!-- Core App files -->
+    <script src="js/db.js" defer></script>
+    <script src="js/app.js" defer></script>
+</head>
+<body>
+    <div id="app-container">
+        <!-- Main Navigation Bar -->
+        <nav id="main-nav">
+            <div class="nav-brand" id="nav-brand-dashboard">
+                <span class="wiifit-text">Web</span><span class="wiifit-subtext">Fit</span>
+            </div>
+            <ul class="nav-links">
+                <li><button class="nav-btn wii-btn" data-view="dashboard">Inicio</button></li>
+                <li><button class="nav-btn wii-btn" data-view="exercises">Ejercicios</button></li>
+                <li><button class="nav-btn wii-btn" data-view="routines">Rutinas</button></li>
+                <li><button class="nav-btn wii-btn" data-view="sessions">Historial</button></li>
+                <li><button class="nav-btn wii-btn debug-btn" data-view="debug">⚙️ Test</button></li>
+            </ul>
+        </nav>
+
+        <!-- Dynamic Content -->
+        <main id="app-content">
+            <div class="wii-loading-container">
+                <div class="wii-spinner"></div>
+                <p>Cargando WebFit...</p>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

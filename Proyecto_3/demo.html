@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebFit - Workshop de Componentes</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .workshop-header {
+            background: var(--wii-teal);
+            padding: 40px var(--spacing-md);
+            text-align: center;
+            color: white;
+            border-bottom-left-radius: 40px;
+            border-bottom-right-radius: 40px;
+            margin-bottom: var(--spacing-xl);
+        }
+        .section {
+            padding: var(--spacing-xl) var(--spacing-md);
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .demo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-lg);
+        }
+        .demo-title {
+            color: var(--wii-teal);
+            margin-bottom: var(--spacing-md);
+            border-bottom: 2px solid var(--wii-teal-light);
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <header class="workshop-header">
+        <h1>WebFit Component Workshop</h1>
+        <p>Pruebas de Átomos y Moléculas (Estilo Wii Fit)</p>
+    </header>
+
+    <main class="section">
+        <h2 class="demo-title">1. Átomos</h2>
+        <div class="demo-grid">
+            <wii-card>
+                <h3>WiiCard Base</h3>
+                <p>Este es el contenedor base con bordes redondeados y sombra suave.</p>
+            </wii-card>
+
+            <wii-card>
+                <h3>Estados de Carga</h3>
+                <loading-state text="Cargando datos..."></loading-state>
+            </wii-card>
+
+            <wii-card>
+                <h3>Estados de Error</h3>
+                <error-state message="No se pudo conectar a la base de datos local."></error-state>
+            </wii-card>
+        </div>
+
+        <h2 class="demo-title" style="margin-top: 40px;">2. Botones & Colores</h2>
+        <wii-card class="demo-grid">
+            <div>
+                <button class="wii-btn">Botón Normal</button>
+                <button class="wii-btn active">Botón Activo</button>
+            </div>
+            <div>
+                <button class="wii-btn wii-btn-primary">Primario</button>
+                <button class="wii-btn wii-btn-danger">Peligro</button>
+            </div>
+        </wii-card>
+    </main>
+
+    <!-- Component Scripts -->
+    <script src="js/components/WiiCard.js"></script>
+    <script src="js/components/States.js"></script>
+    <script>
+        document.addEventListener('retry', () => {
+            alert('Reintento capturado por el Demo!');
+        });
+    </script>
+</body>
+</html>
