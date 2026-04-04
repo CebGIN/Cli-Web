@@ -1,0 +1,113 @@
+/* ==========================================
+   VARIABLES GLOBALES (Design System)
+   ========================================== */
+:root {
+    /* Paleta de Colores */
+    --primary: #8ca5d8;
+    --primary-hover: #d8e2eb;
+    --bg-dark: #0f0f0f;
+    --bg-card: #1e1e1e;
+    --text-main: #ffffff;
+    --text-dim: #b3b3b3;
+    --danger: #ff7675;
+    --success: #55efc4;
+
+    /* Espaciado y Layout */
+    --container-width: 1200px;
+    --nav-height: 70px;
+    --transition: all 0.3s ease;
+}
+
+/* ==========================================
+   RESET & BASE
+   ========================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    width: 90%;
+    max-width: var(--container-width);
+    margin: 0 auto;
+}
+
+/* ==========================================
+   LAYOUT PRINCIPAL
+   ========================================== */
+#app-content {
+    flex: 1;
+    /* Empuja el footer hacia abajo */
+    padding: 40px 0;
+    animation: fadeIn 0.5s ease;
+}
+
+h2 {
+    margin-bottom: 25px;
+    font-size: 2rem;
+    border-left: 5px solid var(--primary);
+    padding-left: 15px;
+}
+
+/* ==========================================
+   FOOTER
+   ========================================== */
+.main-footer {
+    background-color: #000;
+    padding: 30px 0;
+    text-align: center;
+    border-top: 1px solid #222;
+    color: var(--text-dim);
+    font-size: 0.9rem;
+}
+
+.main-footer a {
+    color: var(--primary);
+    text-decoration: none;
+}
+
+.main-footer a:hover {
+    text-decoration: underline;
+}
+
+/* ==========================================
+   ANIMACIONES
+   ========================================== */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ==========================================
+   COMPONENT OVERRIDES (Variables inyectadas)
+   ========================================== */
+search-bar {
+    --search-btn-bg: var(--primary);
+    --search-focus: var(--primary);
+}
+
+nav-bar {
+    --nav-accent: var(--primary);
+}
+
+anime-detail {
+    --primary: var(--primary);
+}

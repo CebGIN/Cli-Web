@@ -69,7 +69,7 @@ class NavBar extends HTMLElement {
         this.$linksContainer.className = 'nav-links';
 
         this.$homeLink = document.createElement('a');
-        this.$homeLink.className = 'nav-link active'; // Activo por defecto en el borrador
+        this.$homeLink.className = 'nav-link active';
         this.$homeLink.textContent = 'Inicio';
         this.$homeLink.dataset.target = '#home';
 
