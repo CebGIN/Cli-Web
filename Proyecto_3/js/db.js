@@ -117,6 +117,44 @@ class DatabaseService {
         return this._executeTransaction('exercises', 'readwrite', (store) => store.delete(id));
     }
 
+    // --- CRUD ROUTINES ---
+
+    async getRoutines() {
+        return this._executeTransaction('routines', 'readonly', (store) => store.getAll());
+    }
+    
+    async getRoutine(id) {
+        return this._executeTransaction('routines', 'readonly', (store) => store.get(id));
+    }
+
+    async addRoutine(routineData) {
+        routineData.createdAt = new Date().toISOString();
+        return this._executeTransaction('routines', 'readwrite', (store) => store.add(routineData));
+    }
+    
+    async updateRoutine(routineData) {
+        return this._executeTransaction('routines', 'readwrite', (store) => store.put(routineData));
+    }
+
+    async deleteRoutine(id) {
+        return this._executeTransaction('routines', 'readwrite', (store) => store.delete(id));
+    }
+
+    // --- CRUD SESSIONS ---
+
+    async getSessions() {
+        return this._executeTransaction('sessions', 'readonly', (store) => store.getAll());
+    }
+
+    async addSession(sessionData) {
+        if (!sessionData.date) sessionData.date = new Date().toISOString();
+        return this._executeTransaction('sessions', 'readwrite', (store) => store.add(sessionData));
+    }
+
+    async deleteSession(id) {
+        return this._executeTransaction('sessions', 'readwrite', (store) => store.delete(id));
+    }
+
     // --- UTILS ---
     
     /**

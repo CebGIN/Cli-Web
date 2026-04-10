@@ -40,7 +40,7 @@
     </header>
 
     <main class="section">
-        <h2 class="demo-title">1. Átomos</h2>
+        <h2 class="demo-title">1. Átomos y Componentes Menores</h2>
         <div class="demo-grid">
             <wii-card>
                 <h3>WiiCard Base</h3>
@@ -69,12 +69,99 @@
                 <button class="wii-btn wii-btn-danger">Peligro</button>
             </div>
         </wii-card>
+        
+        <h2 class="demo-title" style="margin-top: 40px;">3. Módulo Ejercicios (Tarjetas y Modales)</h2>
+        <div class="demo-grid">
+            <div>
+                <h3 style="margin-bottom: 10px">ExerciseCard (Con datos)</h3>
+                <exercise-card id="demo-exercise-card"></exercise-card>
+            </div>
+            
+            <wii-card style="display: flex; flex-direction: column; gap: 10px;">
+                <h3>Lanzadores de Modales</h3>
+                <p>Para no saturar la UI, los formularios y advertencias usan diálogos HTML5.</p>
+                <button class="wii-btn wii-btn-danger" id="btn-demo-confirm">Abrir ConfirmDialog</button>
+                <button class="wii-btn wii-btn-primary" id="btn-demo-editor">Abrir ExerciseEditor (Crear)</button>
+                <button class="wii-btn" id="btn-demo-editor-edit">Abrir ExerciseEditor (Editar)</button>
+            </wii-card>
+        </div>
+        
+        <h2 class="demo-title" style="margin-top: 40px;">4. Testing Bed de Base de Datos</h2>
+        <debug-view></debug-view>
+
+        <h2 class="demo-title" style="margin-top: 40px;">5. Routine Builder (Molécula Compleja)</h2>
+        <div>
+            <button class="wii-btn wii-btn-primary" id="btn-demo-routine-builder">Abrir Generador de Rutinas</button>
+        </div>
+
     </main>
 
+    <!-- Global Modals for Demo -->
+    <confirm-dialog id="demo-confirm-dialog"></confirm-dialog>
+    <exercise-editor id="demo-exercise-editor"></exercise-editor>
+    <routine-builder id="demo-routine-builder"></routine-builder>
+
     <!-- Component Scripts -->
+    <script src="js/db.js"></script>
+    <script src="js/debug.js"></script>
     <script src="js/components/WiiCard.js"></script>
     <script src="js/components/States.js"></script>
+    <script src="js/components/ConfirmDialog.js"></script>
+    <script src="js/components/ExerciseCard.js"></script>
+    <script src="js/components/ExerciseEditor.js"></script>
+    <script src="js/components/RoutineCard.js"></script>
+    <script src="js/components/RoutineBuilder.js"></script>
+    
     <script>
+        // Init fake DB for debug view
+        window.dbService.init().then(() => console.log("DB Loaded in Demo"));
+
+        // Setup Exercise Card demo data
+        const card = document.getElementById('demo-exercise-card');
+        const demoData = {
+            id: 1, name: 'Press de Banca', muscleGroup: 'Pecho', type: 'Máquina', image: 'default', description: 'Realizar lentamente'
+        };
+        card.data = demoData;
+        card.addEventListener('edit-exercise', (e) => alert('Edit click: ' + e.detail.name));
+        card.addEventListener('delete-exercise', (e) => alert('Delete click: ' + e.detail.name));
+
+        // Setup Modals
+        const confirmDialog = document.getElementById('demo-confirm-dialog');
+        document.getElementById('btn-demo-confirm').addEventListener('click', async () => {
+            const result = await confirmDialog.ask('Confirmación de Prueba', '¿Aceptar o Cancelar?');
+            alert(result ? 'Aceptaste! ✅' : 'Cancelaste! ❌');
+        });
+
+        const editorDialog = document.getElementById('demo-exercise-editor');
+        document.getElementById('btn-demo-editor').addEventListener('click', () => {
+            editorDialog.open(null); // Mode: Create
+        });
+        document.getElementById('btn-demo-editor-edit').addEventListener('click', () => {
+            editorDialog.open(demoData); // Mode: Edit
+        });
+
+        // Listen for editor save
+        editorDialog.addEventListener('save-exercise', (e) => {
+            console.log('Saved exercise data:', e.detail);
+            alert('Datos guardados (revisa la consola): ' + e.detail.name);
+        });
+
+        const routineBuilder = document.getElementById('demo-routine-builder');
+        document.getElementById('btn-demo-routine-builder').addEventListener('click', () => {
+            // Supply fake available exercises to the builder context
+            routineBuilder.availableExercises = [
+                { id: 1, name: 'Press de Banca', muscleGroup: 'Pecho' },
+                { id: 2, name: 'Sentadilla', muscleGroup: 'Piernas' },
+                { id: 3, name: 'Curl Bíceps', muscleGroup: 'Brazos' }
+            ];
+            routineBuilder.open(null);
+        });
+
+        routineBuilder.addEventListener('save-routine', (e) => {
+            console.log('Saved routine data:', e.detail);
+            alert('Rutina Guardada! (Revisar consola) => ' + e.detail.name);
+        });
+
         document.addEventListener('retry', () => {
             alert('Reintento capturado por el Demo!');
         });

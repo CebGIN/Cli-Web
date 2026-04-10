@@ -67,16 +67,16 @@ function switchView(viewName, params = {}) {
             nodeToMount.innerHTML = `<h1 class="wiifit-text">Dashboard</h1><p>Próximamente...</p>`;
             break;
         case 'exercises':
-            nodeToMount = document.createElement('div');
-            nodeToMount.innerHTML = `<h1 class="wiifit-text">Ejercicios</h1><p>Próximamente...</p>`;
+            nodeToMount = document.createElement('exercises-view');
             break;
         case 'routines':
-            nodeToMount = document.createElement('div');
-            nodeToMount.innerHTML = `<h1 class="wiifit-text">Rutinas</h1><p>Próximamente...</p>`;
+            nodeToMount = document.createElement('routines-view');
             break;
         case 'sessions':
-            nodeToMount = document.createElement('div');
-            nodeToMount.innerHTML = `<h1 class="wiifit-text">Historial</h1><p>Próximamente...</p>`;
+            nodeToMount = document.createElement('session-history-view');
+            break;
+        case 'session/new':
+            nodeToMount = document.createElement('session-view');
             break;
         case 'debug':
             // Since debug.js is loaded in index.html, it should be available.
@@ -93,7 +93,13 @@ function switchView(viewName, params = {}) {
             nodeToMount.innerHTML = `<h2>Vista no encontrada</h2>`;
     }
 
-    if (nodeToMount) $appContent.appendChild(nodeToMount);
+    if (nodeToMount) {
+        // If the component has a setParams method, call it before mounting
+        if (typeof nodeToMount.setParams === 'function') {
+            nodeToMount.setParams(params);
+        }
+        $appContent.appendChild(nodeToMount);
+    }
 }
 
 window.navigateBack = function() {
