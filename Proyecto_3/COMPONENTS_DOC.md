@@ -43,6 +43,22 @@ Este documento indexa y describe todos los Custom Elements (Web Components) desa
     *   `ask(title, message)` (Async): Abre el diálogo y retorna una Promesa que resuelve a `true` (Confirmar) o `false` (Cancelar).
 *   **Eventos:** N/A (Se maneja vía retorno de la promesa).
 
+### 5. `<wii-chart>`
+**Archivo:** `js/components/WiiChart.js`  
+**Descripción:** Wrapper reutilizable de Chart.js. Configura automáticamente fuentes y colores globales para mantener la consistencia estética.
+
+*   **Propiedades/Setters:**
+    *   `config` (Object): Recibe un objeto `{type, title, data, options}` siguiendo la estructura estándar de Chart.js.
+*   **Eventos:** N/A.
+
+### 6. `<wii-avatar>`
+**Archivo:** `js/components/WiiAvatar.js`  
+**Descripción:** Representación visual del usuario que evoluciona con el progreso. Calcula automáticamente el Nivel y la barra de XP basada en el volumen total de entrenamiento.
+
+*   **Propiedades/Setters:**
+    *   `xp` (Number): Establece el volumen acumulado (XP) y recalcula nivel y progreso visual.
+*   **Eventos:** N/A.
+
 ---
 
 ## 🏋️ Módulo de Ejercicios
@@ -132,10 +148,14 @@ Este documento indexa y describe todos los Custom Elements (Web Components) desa
 **Archivo:** `js/views/SessionHistoryView.js`  
 **Descripción:** Lista cronológica de entrenamientos realizados con cálculo dinámico de Volumen Total.
 
+### 14. `<dashboard-view>`
+**Archivo:** `js/views/DashboardView.js`  
+**Descripción:** Vista principal del sistema. Realiza agregación de datos para renderizar 4 gráficos de Chart.js y tarjetas de resumen (Racha, Favoritos, Totales).
+
 ---
 
 ## 🧪 Utilidades
 
-### 14. `<debug-view>`
+### 15. `<debug-view>`
 **Archivo:** `js/debug.js`  
 **Descripción:** Banco de pruebas interno para realizar tests de base de datos e inspección de logs en tiempo real.

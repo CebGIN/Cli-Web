@@ -87,6 +87,7 @@ class SessionHistoryView extends HTMLElement {
                                 <p>📅 ${date} • ⏱️ ${s.duration} mins</p>
                             </div>
                             <div class="session-badges">
+                                <span class="badge" title="Calorías Estimadas">🔥 ${s.calories || 0} kcal</span>
                                 <span class="badge" title="Volumen Total">💪 ${Math.round(totalVolume)} kg</span>
                                 <button class="wii-btn btn-view-session" data-id="${s.id}">Ver</button>
                             </div>

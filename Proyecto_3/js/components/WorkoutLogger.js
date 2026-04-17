@@ -273,6 +273,11 @@ class WorkoutLogger extends HTMLElement {
             this._sessionData.duration = Math.floor((Date.now() - this._sessionData.startTime) / 60000);
             this._sessionData.routineId = this._routine.id;
             
+            // --- Calorie Calculation (PF-02) ---
+            // Simple formula: volume * 0.05 + duration * 3
+            const totalVol = this._sessionData.stats.reduce((acc, ex) => acc + ex.sets.reduce((sak, set) => sak + (set.weight * set.reps), 0), 0);
+            this._sessionData.calories = Math.round(totalVol * 0.05 + this._sessionData.duration * 3);
+            
             this.dispatchEvent(new CustomEvent('finish-session', { 
                 detail: this._sessionData, 
                 bubbles: true 

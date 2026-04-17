@@ -33,8 +33,8 @@ document.addEventListener('DOMContentLoaded', () => {
     window.dbService.init()
         .then(() => {
             console.log("WebFit App ready. DB Initialized.");
-            // Initial view: dashboard (or debug for dev)
-            const startingView = 'debug'; 
+            // Initial view
+            const startingView = 'dashboard'; 
             switchView(startingView);
         })
         .catch(err => {
@@ -63,8 +63,7 @@ function switchView(viewName, params = {}) {
 
     switch (viewName) {
         case 'dashboard':
-            nodeToMount = document.createElement('div');
-            nodeToMount.innerHTML = `<h1 class="wiifit-text">Dashboard</h1><p>Próximamente...</p>`;
+            nodeToMount = document.createElement('dashboard-view');
             break;
         case 'exercises':
             nodeToMount = document.createElement('exercises-view');
