@@ -103,9 +103,12 @@ class SessionView extends HTMLElement {
             return;
         }
 
-        this.innerHTML = '';
+        this.innerHTML = `
+            <div id="logger-container"></div>
+            <session-summary-dialog id="session-end-modal"></session-summary-dialog>
+        `;
         const logger = document.createElement('workout-logger');
-        this.appendChild(logger);
+        this.querySelector('#logger-container').appendChild(logger);
         logger.setup(routine, this._exercises);
 
         this.addEventListener('cancel-session', async () => {
@@ -115,12 +118,23 @@ class SessionView extends HTMLElement {
 
         this.addEventListener('finish-session', async (e) => {
             const sessionData = e.detail;
-            this.innerHTML = `<loading-state text="Guardando entrenamiento..."></loading-state>`;
+            const loggerContainer = this.querySelector('#logger-container');
+            loggerContainer.innerHTML = `<loading-state text="Guardando entrenamiento..."></loading-state>`;
             
             try {
                 await window.dbService.addSession(sessionData);
-                // Navigate to exercises dashboard or session history
-                window.switchView('sessions');
+                const history = await window.dbService.getSessions();
+                
+                loggerContainer.innerHTML = ''; // Hide loader
+                
+                const modal = this.querySelector('#session-end-modal');
+                modal.show(sessionData, history);
+                
+                // Wait for it to close before redirecting
+                modal.addEventListener('summary-closed', () => {
+                    window.switchView('dashboard');
+                }, { once: true });
+                
             } catch (err) {
                 alert("Error al guardar: " + err.message);
                 this.render();

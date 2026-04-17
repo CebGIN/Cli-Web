@@ -112,15 +112,20 @@ class DashboardView extends HTMLElement {
         // 3. Frequency (Last 7 days)
         const frequencyData = this.getFrequencyData();
 
-        // 4. XP and Streak
+        // 4. XP and Level Logic
         const totalXP = volumeTimeline.reduce((acc, v) => acc + v.volume, 0);
+        const calculatedLevel = Math.floor(Math.sqrt(totalXP / 250)) + 1;
+        
+        // 5. User Profile
+        const profile = JSON.parse(localStorage.getItem('webfit_profile')) || { name: 'Usuario' };
 
         this.innerHTML = `
             <div class="gamified-header">
                 <wii-avatar id="user-avatar"></wii-avatar>
                 <div>
-                    <h1 class="wiifit-text" style="font-size: 2.5rem; margin-bottom: 5px;">¡Hola de nuevo!</h1>
-                    <p style="color: var(--wii-text-muted); font-size: 1.1rem;">Tu progreso hoy se ve excelente.</p>
+                    <h1 class="wiifit-text" style="font-size: 2.5rem; margin-bottom: 5px;">¡Hola, ${profile.name}!</h1>
+                    <p style="color: var(--wii-text-muted); font-size: 1.1rem; margin-bottom: 15px;">Tu progreso se ve excelente.</p>
+                    <button class="wii-btn" onclick="window.switchView('profile')" style="padding: 5px 15px; font-size: 0.8rem;">Editar Perfil / Peso</button>
                 </div>
             </div>
 
@@ -145,10 +150,22 @@ class DashboardView extends HTMLElement {
                 <wii-chart id="chart-volume"></wii-chart>
                 <wii-chart id="chart-progress"></wii-chart>
             </div>
+            
+            <level-up-dialog id="dashboard-level-up"></level-up-dialog>
         `;
 
         this.querySelector('#user-avatar').xp = totalXP;
         this.initCharts(frequencyData, muscleCounts, volumeTimeline);
+
+        // Check if level increased
+        const savedLevel = parseInt(localStorage.getItem('webfit_last_level')) || 1;
+        if (calculatedLevel > savedLevel) {
+            localStorage.setItem('webfit_last_level', calculatedLevel);
+            // Wait slightly for smooth rendering
+            setTimeout(() => {
+                this.querySelector('#dashboard-level-up').show(calculatedLevel);
+            }, 300);
+        }
     }
 
     initCharts(frequencyData, muscleCounts, volumeTimeline) {

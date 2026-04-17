@@ -23,6 +23,7 @@ class ConfirmDialog extends HTMLElement {
                     max-width: 400px;
                     width: 90%;
                     text-align: center;
+                    margin: auto;
                 }
                 
                 confirm-dialog dialog::backdrop {

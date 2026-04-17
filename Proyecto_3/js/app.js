@@ -33,8 +33,9 @@ document.addEventListener('DOMContentLoaded', () => {
     window.dbService.init()
         .then(() => {
             console.log("WebFit App ready. DB Initialized.");
-            // Initial view
-            const startingView = 'dashboard'; 
+            // Initial view: Check Profile
+            const hasProfile = localStorage.getItem('webfit_profile') !== null;
+            const startingView = hasProfile ? 'dashboard' : 'profile'; 
             switchView(startingView);
         })
         .catch(err => {
@@ -62,6 +63,9 @@ function switchView(viewName, params = {}) {
     let nodeToMount = null;
 
     switch (viewName) {
+        case 'profile':
+            nodeToMount = document.createElement('profile-view');
+            break;
         case 'dashboard':
             nodeToMount = document.createElement('dashboard-view');
             break;

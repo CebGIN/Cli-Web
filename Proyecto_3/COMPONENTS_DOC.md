@@ -59,6 +59,22 @@ Este documento indexa y describe todos los Custom Elements (Web Components) desa
     *   `xp` (Number): Establece el volumen acumulado (XP) y recalcula nivel y progreso visual.
 *   **Eventos:** N/A.
 
+### 7. `<level-up-dialog>`
+**Archivo:** `js/components/LevelUpDialog.js`  
+**Descripción:** Modal animado de felicitaciones que se activa cuando el sistema detecta que el usuario ha subido de nivel.
+
+*   **Métodos:**
+    *   `show(newLevel)`: Despliega el modal en la pantalla con el nuevo número de nivel proporcionado.
+
+### 8. `<session-summary-dialog>`
+**Archivo:** `js/components/SessionSummaryDialog.js`  
+**Descripción:** Modal de felicitaciones al finalizar un entrenamiento. Muestra el resumen de calorías, volumen, tiempo y un gráfico comparativo del progreso de sesiones anteriores.
+
+*   **Métodos:**
+    *   `show(currentSession, history)`: Extrae y renderiza métricas y gráficos para la sesión recién terminada.
+*   **Eventos:**
+    *   `summary-closed`: Notifica que el usuario ha revisado su resumen y está listo para navegar a otra vista.
+
 ---
 
 ## 🏋️ Módulo de Ejercicios
@@ -152,10 +168,14 @@ Este documento indexa y describe todos los Custom Elements (Web Components) desa
 **Archivo:** `js/views/DashboardView.js`  
 **Descripción:** Vista principal del sistema. Realiza agregación de datos para renderizar 4 gráficos de Chart.js y tarjetas de resumen (Racha, Favoritos, Totales).
 
+### 15. `<profile-view>`
+**Archivo:** `js/views/ProfileView.js`  
+**Descripción:** Vista para la creación y edición del perfil del usuario (nombre, peso, altura). Funciona como pantalla de bienvenida o modal de edición desde el dashboard.
+
 ---
 
 ## 🧪 Utilidades
 
-### 15. `<debug-view>`
+### 16. `<debug-view>`
 **Archivo:** `js/debug.js`  
 **Descripción:** Banco de pruebas interno para realizar tests de base de datos e inspección de logs en tiempo real.
